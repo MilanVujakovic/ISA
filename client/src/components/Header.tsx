@@ -14,8 +14,8 @@ const HeaderDiv = styled.div `
     margin: 0;
     padding: 3rem;
 
-    color: #fff;
-    background-color: #000;
+    color: #000;
+    background-color: #fff;
 `
 
 export default Header

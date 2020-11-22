@@ -15,12 +15,25 @@ const App = () => {
 }
 
 const GlobalStyle = createGlobalStyle`
+
     body {
         margin: 0;
+        font-family: 'Roboto', sans-serif;
         font-size: 1.6rem;
+
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
     :root {
         font-size: 62.5%;
+    }
+
+    a, u {
+        text-decoration: none;
+    }
+
+    ul {
+        list-style: none;
     }
 `
 
