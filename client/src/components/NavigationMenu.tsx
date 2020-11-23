@@ -2,13 +2,30 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 
-export const NavigationMenu = () => {
+export const NavigationMenu: React.FC<{ isAuthenticated:boolean }> = ({ isAuthenticated }) => {
     return (
         <NavMenuShadowStyled>
-            <NavMenu>
+            <NavLeftMenuStyled>
                 <NavMenuItemStyled link="/medicines">Medicines</NavMenuItemStyled>
                 <NavMenuItemStyled link="/pharmacies">Pharmacies</NavMenuItemStyled>
-            </NavMenu>
+                {
+                    isAuthenticated 
+                        &&  <React.Fragment>
+                                <NavMenuItemStyled link="/schedule" className="">Schedule</NavMenuItemStyled>
+                                <NavMenuItemStyled link="/e-prescriptions">ePrescriptions</NavMenuItemStyled>
+                            </React.Fragment>   
+                }
+            </NavLeftMenuStyled>
+            <NavRightMenuStyled>
+            {
+                    isAuthenticated 
+                        &&  <React.Fragment>
+                                <NavMenuItemStyled link="/your-history">Your history</NavMenuItemStyled>
+                                <NavMenuItemStyled link="/complain">Complain</NavMenuItemStyled>
+                            </React.Fragment>   
+                }
+            </NavRightMenuStyled>
+            
         </NavMenuShadowStyled>
     )
 }
@@ -22,26 +39,27 @@ const NavMenuItem: React.FC<{ link:string, className?:string }> = ({link, classN
 }
 
 const NavMenuShadowStyled = styled.div`
+    display: flex;
     box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
     background-color: #006d77;
 `
 
-const NavMenu = styled.ul`
-    flex: 1;
+const NavLeftMenuStyled = styled.ul`
+    flex: 2;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    width: 80%;
-    margin: auto;
+    justify-content: center;
+`
+const NavRightMenuStyled = styled(NavLeftMenuStyled)`
+    flex: 1;
 `
 
 const NavMenuItemStyled = styled(NavMenuItem)`
-    padding: 2rem;
-    font-weight: 400;
-
     a{
+        display: block;
+        padding: 2rem;
         color: #f1faee;
-        
+        font-weight: 400;
         :hover {
             color: #83c5be;
         }

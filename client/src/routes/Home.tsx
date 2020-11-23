@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <HomeDiv>
             <Header />
-            <NavigationMenu />
+            <NavigationMenu isAuthenticated={ true } />
         </HomeDiv>
     )
 }
