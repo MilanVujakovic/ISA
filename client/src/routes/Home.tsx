@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Home = () => {
     return (
         <HomeDiv>
-            <Header />
+            <Header isAuthenticated={ false } />
             <NavigationMenu isAuthenticated={ true } />
         </HomeDiv>
     )
