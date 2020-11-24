@@ -1,17 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { createGlobalStyle } from 'styled-components'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Home from './routes/Home'
+import { myTheme } from './assets/theme/theme';
 
 const App = () => {
-    return <div>
-        <GlobalStyle />
-        <Router>
-            <Switch>
-                <Route exact path="/" component={ Home } />
-            </Switch>
-        </Router>
-    </div>
+    return <ThemeProvider theme={myTheme}>
+                <GlobalStyle />
+                <Router>
+                    <Switch>
+                        <Route exact path="/" component={ Home } />
+                    </Switch>
+                </Router>
+            </ThemeProvider>
 }
 
 const GlobalStyle = createGlobalStyle`

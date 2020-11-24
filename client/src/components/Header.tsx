@@ -57,15 +57,16 @@ const StyledHeaderMenuItem = styled(HeaderMenuItem)<{ outlined:boolean }>`
     a{
         display: block;
         padding: 1rem 2rem;
-        border: 1px solid #006d77;
+        border: 1px solid ${ props => props.outlined ? props.theme.colors.primary.main : props.theme.colors.secondary.main };
         border-radius: 5%;
 
-        color: ${ props => props.outlined ? "#006d77" : "#fff" };
-        background-color: ${ props => props.outlined ? "#fff" : "#006d77" };
+        color: ${ props => props.outlined ? props.theme.colors.primary.main : props.theme.colors.secondary.contrastText };
+        background-color: ${ props => props.outlined ? "inherit" : props.theme.colors.secondary.main };
         font-weight: 400;
         :hover {
-            color: #83c5be;
-            border-color: ${ props => props.outlined && "#83c5be" };
+            border-color: ${ props => props.outlined ? props.theme.colors.primary.light : props.theme.colors.secondary.light };
+            color: ${ props => props.outlined && props.theme.colors.primary.light };
+            background-color: ${ props => !props.outlined && props.theme.colors.secondary.light }
         }
     }
 `

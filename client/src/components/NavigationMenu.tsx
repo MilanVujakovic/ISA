@@ -40,7 +40,7 @@ const NavMenuItem: React.FC<{ link:string, className?:string }> = ({link, classN
 const StyledNavMenuShadow = styled.div`
     display: flex;
     box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
-    background-color: #006d77;
+    background-color: ${ props => props.theme.colors.primary.main };
 `
 
 const StyledNavMenu = styled.ul<{ flex:string }>`
@@ -57,7 +57,7 @@ const StyledNavMenuItem = styled(NavMenuItem)`
         color: #f1faee;
         font-weight: 400;
         :hover {
-            color: #83c5be;
+            color: ${ props => props.theme.colors.primary.light };
         }
     }
 `
