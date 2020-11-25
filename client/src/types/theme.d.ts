@@ -9,9 +9,13 @@ interface IPalette {
 
 declare module 'styled-components' {
     export interface DefaultTheme {
+        borderRadius: string
         colors: {
             primary: IPalette
             secondary: IPalette
+            common: {
+                whiteShade: string
+            }
         }
     }
 }
