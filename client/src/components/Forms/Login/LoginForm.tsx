@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { TextField } from '@material-ui/core';
 
-function LoginForm() {
+const LoginForm: React.FC<ILoginFormContent> = (props: ILoginFormContent) => {
+    const handleLogin = props.handleLogin;
     return (
         <StyledTab>
-            <StyledLoginFormContent 
-                email=""
-                password=""
+            <LoginFormContent 
+                { ...props }
             />
-            <StyledButton>Log in</StyledButton>
+            <StyledButton onClick={ handleLogin }>Log in</StyledButton>
         </StyledTab>
     )
 }
@@ -18,16 +18,19 @@ interface ILoginFormContent {
     email: string
     password: string
     isLoading?: boolean
-    onChange?: Function
-    onLogin?: Function
-    errors?: string
+    handleChange: React.ChangeEventHandler<HTMLInputElement>
+    handleLogin: React.MouseEventHandler
+    errors: {
+        email: string
+        password: string
+    }
     className?: string
 }
 
 const LoginFormContent: React.FC<ILoginFormContent> = (props) => {
-    const { className, email, password, onChange, errors, onLogin, isLoading } = props;
+    const { email, password, handleChange, errors, isLoading } = props;
     return (
-        <div className={ className }>
+        <StyledLoginFormContent>
             <TextField
                 label="Email"
                 name="email"
@@ -36,6 +39,9 @@ const LoginFormContent: React.FC<ILoginFormContent> = (props) => {
                 value={ email }
                 color="secondary"
                 inputProps={{ maxLength: 64 }}
+                onChange={ handleChange }
+                error={ errors.email ? true : false }
+                helperText={ errors.email || '' }
                 fullWidth
                 autoFocus 
                 required
@@ -48,10 +54,13 @@ const LoginFormContent: React.FC<ILoginFormContent> = (props) => {
                 value={ password }
                 color="secondary"
                 inputProps={{ maxLength: 64 }}
+                onChange={ handleChange }
+                error={ errors.email ? true : false }
+                helperText={ errors.email || '' }
                 fullWidth
                 required
             />
-        </div>
+        </StyledLoginFormContent>
     );
 };
 
@@ -72,7 +81,7 @@ const StyledLoginTitle = styled.h1`
     color: ${ props => props.theme.colors.secondary.main };
 `
 
-const StyledLoginFormContent = styled(LoginFormContent)`
+const StyledLoginFormContent = styled.div`
     flex: 5;
     display: flex;
     flex-direction: column;
