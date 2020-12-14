@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export const Header: React.FC<{ isAuthenticated:boolean }> = ({ isAuthenticated })  => {
     return (
@@ -27,10 +27,9 @@ const HeaderMenuItem: React.FC<{ link:string, className?:string }> = ({link, cla
             <Link to={ link }>{ children }</Link>
         </li>
     );
-}
+};
 
 const StyledHeader = styled.div `
-    flex: 1;
     display: flex;
     padding: 3rem;
 
@@ -58,7 +57,7 @@ const StyledHeaderMenuItem = styled(HeaderMenuItem)<{ outlined:boolean }>`
         display: block;
         padding: 1rem 2rem;
         border: 1px solid ${ props => props.outlined ? props.theme.colors.primary.main : props.theme.colors.secondary.main };
-        border-radius: 5%;
+        border-radius: ${ props => props.theme.borderRadius };
 
         color: ${ props => props.outlined ? props.theme.colors.primary.main : props.theme.colors.secondary.contrastText };
         background-color: ${ props => props.outlined ? "inherit" : props.theme.colors.secondary.main };
