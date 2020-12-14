@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { myTheme, muiTheme } from './assets/theme/theme';
+import store from './redux/store';
 // Material UI
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 // components
@@ -11,6 +12,7 @@ import NavigationMenu from './components/NavigationMenu';
 // routes
 import Home from './routes/Home';
 import Login from './routes/Login';
+import { Provider } from 'react-redux';
 
 const themeMUI = createMuiTheme(muiTheme);
 
@@ -18,14 +20,16 @@ const App = () => {
     return <ThemeProvider theme={ myTheme }>
                 <MuiThemeProvider theme={themeMUI}>
                     <GlobalStyle />
-                    <Router>
-                        <Header isAuthenticated={ false } />
-                        <NavigationMenu isAuthenticated={ true } />
-                        <Switch>
-                            <Route exact path="/" component={ Home } />
-                            <Route exact path="/login" component={ Login } />
-                        </Switch>
-                    </Router>
+                    <Provider store={ store }>
+                        <Router>
+                            <Header isAuthenticated={ false } />
+                            <NavigationMenu isAuthenticated={ true } />
+                            <Switch>
+                                <Route exact path="/" component={ Home } />
+                                <Route exact path="/login" component={ Login } />
+                            </Switch>
+                        </Router>
+                    </Provider>
                 </MuiThemeProvider>
             </ThemeProvider>
 }

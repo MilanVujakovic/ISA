@@ -1,5 +1,6 @@
-import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import createSagaMiddleware  from "redux-saga";
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware  from 'redux-saga';
+import rootSaga from './sagas/rootSaga';
 
 // Reducers
 import dataReducer from './reducers/dataReducer';
@@ -9,22 +10,25 @@ import uiReducer from './reducers/uiReducer';
 const initialState = {};
 
 const sagaMiddleware = createSagaMiddleware()
-const middleware = [sagaMiddleware];
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
     user: userReducer,
     data: dataReducer,
     UI: uiReducer
 });
 
+export type RootState = ReturnType<typeof rootReducer>
+
 const store = createStore(
-    reducers, 
+    rootReducer, 
     initialState, 
     compose(
-        applyMiddleware(...middleware),
+        applyMiddleware(sagaMiddleware),
         (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
             (window as any).__REDUX_DEVTOOLS_EXTENSION__()
     )
 );
+
+sagaMiddleware.run(rootSaga)
 
 export default store;

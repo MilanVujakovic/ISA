@@ -1,6 +1,6 @@
 import 'styled-components';
 
-interface IPalette {
+interface Palette {
     main: string
     dark: string
     light: string
@@ -11,8 +11,8 @@ declare module 'styled-components' {
     export interface DefaultTheme {
         borderRadius: string
         colors: {
-            primary: IPalette
-            secondary: IPalette
+            primary: Palette
+            secondary: Palette
             common: {
                 whiteShade: string
             }

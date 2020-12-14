@@ -1,4 +1,4 @@
-import { SET_USER_DATA, LOGOUT_USER, LOGIN_USER_SUCCESS, UserActionTypes } from '../types';
+import { SET_USER_DATA, LOGOUT_USER, LOGIN_USER_SUCCESS, UserActionTypes } from '../actions/actionTypes';
 
 interface IInitialState  {
     isAuthenticated: boolean

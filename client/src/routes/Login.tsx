@@ -29,7 +29,7 @@ const StyledLogin = styled.div`
 `
 
 const LoginTab = styled.div`
-    width: 25%;
+    width: 20%;
     margin: auto;
 `
 
