@@ -13,8 +13,12 @@ declare module 'styled-components' {
         colors: {
             primary: Palette
             secondary: Palette
+            tertiary: {
+                main: string
+            }
             common: {
                 whiteShade: string
+                font: string
             }
         }
     }

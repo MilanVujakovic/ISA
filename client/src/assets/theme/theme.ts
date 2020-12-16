@@ -15,8 +15,12 @@ export const myTheme: DefaultTheme = {
             light: '#cc7084',
             contrastText: '#ffffff'
         },
+        tertiary: {
+            main: '#32dfba'
+        },
         common: {
-            whiteShade: '#f2f0f0'
+            whiteShade: '#f2f0f0',
+            font: '#dbd9d9'
         }
     }
 }

@@ -10,9 +10,10 @@ import Header from './components/Header';
 import NavigationMenu from './components/NavigationMenu';
 
 // routes
+import { Provider } from 'react-redux';
 import Home from './routes/Home';
 import Login from './routes/Login';
-import { Provider } from 'react-redux';
+import Signup from './routes/Signup';
 
 const themeMUI = createMuiTheme(muiTheme);
 
@@ -27,6 +28,7 @@ const App = () => {
                             <Switch>
                                 <Route exact path="/" component={ Home } />
                                 <Route exact path="/login" component={ Login } />
+                                <Route exact path="/signup" component={ Signup } />
                             </Switch>
                         </Router>
                     </Provider>

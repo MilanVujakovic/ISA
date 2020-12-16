@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { TextField } from '@material-ui/core';
+import { StyledTab, StyledButton } from '../../../assets/styles';
 
-const LoginForm: React.FC<ILoginFormContent> = (props: ILoginFormContent) => {
+const LoginForm = (props: LoginFormContentProps) => {
     const handleLogin = props.handleLogin;
     return (
-        <StyledTab>
+        <StyledTab height="30vh">
             <LoginFormContent 
                 { ...props }
             />
@@ -14,7 +15,7 @@ const LoginForm: React.FC<ILoginFormContent> = (props: ILoginFormContent) => {
     )
 }
 
-interface ILoginFormContent {
+interface LoginFormContentProps {
     email: string
     password: string
     isLoading?: boolean
@@ -27,10 +28,10 @@ interface ILoginFormContent {
     className?: string
 }
 
-const LoginFormContent: React.FC<ILoginFormContent> = (props) => {
+const LoginFormContent: React.FC<LoginFormContentProps> = (props) => {
     const { email, password, handleChange, errors, isLoading } = props;
     return (
-        <StyledLoginFormContent>
+        <StyledLoginFormContent method='POST'>
             <TextField
                 label="Email"
                 name="email"
@@ -64,16 +65,6 @@ const LoginFormContent: React.FC<ILoginFormContent> = (props) => {
     );
 };
 
-const StyledTab = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 30vh;
-    box-shadow: 0 0.1rem 1rem 0 rgba(0, 0, 0, 0.2);
-    border-radius: ${ props => props.theme.borderRadius };
-    background-color: #fff;
-    overflow: hidden;
-`
-
 const StyledLoginTitle = styled.h1`
     flex: 1;
     margin: 0;
@@ -81,7 +72,7 @@ const StyledLoginTitle = styled.h1`
     color: ${ props => props.theme.colors.secondary.main };
 `
 
-const StyledLoginFormContent = styled.div`
+const StyledLoginFormContent = styled.form`
     flex: 5;
     display: flex;
     flex-direction: column;
@@ -89,19 +80,5 @@ const StyledLoginFormContent = styled.div`
     justify-content: space-around;
     align-items: center;
 `
-
-const StyledButton = styled.button`
-    flex: 1.5;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: ${ props => props.theme.colors.secondary.contrastText };
-    background-color: ${ props => props.theme.colors.secondary.main };
-
-    :hover {
-        background-color: ${ props => props.theme.colors.secondary.light };
-    }
-`
-
 
 export default LoginForm

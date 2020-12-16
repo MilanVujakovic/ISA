@@ -7,15 +7,10 @@ import { loginUser } from '../../../redux/actions/userActions';
 import { clearErrors } from '../../../redux/actions/uiActions';
 import { RootState } from '../../../redux/store';
 
-interface errorMessages {
-    errors: {
-        email: string
-        password: string
-    }
-}
+
 const LoginFormContainer = ({ history }: any) => {
     const dispatch = useDispatch();
-    const { errors }: errorMessages = useSelector((state: RootState) => state.UI);
+    const { errors }: AuthErrorMessages = useSelector((state: RootState) => state.UI);
     
     //const errors = { email: "", password: ""}
     const [email, setEmail] = useState<string>("");
