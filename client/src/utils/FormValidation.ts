@@ -1,7 +1,7 @@
 const validEmailRegex = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
 
 
-export const validateForm = (validationRequirements:any, data:any) => {
+export const validateForm = (validationRequirements:any, data:any): ValidateSignup => {
     let errors:any = {};
     
    Object.keys(data).forEach((property) => {
@@ -98,9 +98,12 @@ export const validateLoginForm = (userData:any) => {
     return validateForm(validationRequirements, userData);
 }
 
+interface ValidateSignup {
+    isValid: boolean
+    errors: AuthErrors
+}
 
-
-export const validateSignupForm = (stepData:any, step:any) => {
+export const validateSignupForm = (stepData:any, step:any): ValidateSignup => {
     let validationRequirements = {};
     switch(step) {
         case 1:
@@ -117,20 +120,11 @@ export const validateSignupForm = (stepData:any, step:any) => {
             return validateForm(validationRequirements, stepData);
         case 2:
             validationRequirements = {
-                username: {
+                firstName: {
                     isRequired: true,
                 },
-                fullName: {
+                lastName: {
                     isRequired: true,
-                },
-                dobDay: {
-                    isRequired: true
-                },
-                dobMonth: {
-                    isRequired: true
-                },
-                dobYear: {
-                    isRequired: true
                 }
             };
             return validateForm(validationRequirements, stepData);
@@ -154,5 +148,6 @@ export const validateSignupForm = (stepData:any, step:any) => {
             };
             return validateForm(validationRequirements, stepData);
         default: console.log(`Invalid step: ${step}.`);
+        return { isValid: false, errors: {} as AuthErrors };
     }
 }

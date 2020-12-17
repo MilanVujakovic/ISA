@@ -7,7 +7,7 @@ const MultiStepForm = (props: MultiStepFormProps) => {
     return (
         <StyledMultiStepForm>
             { progressLine && progressLine }
-            <StyledTab height="40vh">
+            <StyledTab height="45vh">
                 <StyledSignupForm method="POST" noValidate>
                     { props.children[showStep - 1] }
                 </StyledSignupForm>
@@ -17,13 +17,16 @@ const MultiStepForm = (props: MultiStepFormProps) => {
 };
 
 export const FormStep = (props: FormStepProps) => {
-    const { backText, onBack, forwardText, onForward, disableOnForward } = props;
+    const { title, backText, onBack, forwardText, onForward, disableOnForward } = props;
     const hasBack = backText ? true : false;
     return (
         <React.Fragment>
             <StyledFormStep>
+                    <StyledStepTitle>{ title }</StyledStepTitle>
                     {/* --- Inputs --- */}
+                    <StyledInputs>
                     { props.children }
+                    </StyledInputs>
             </StyledFormStep>
             <StyledButtons>
                 {
@@ -53,12 +56,21 @@ const StyledMultiStepForm = styled.div`
     justify-content: flex-start;
 `
 const StyledFormStep = styled.div`
+    min-width: 35vh;
+    max-width: 35vh;
     flex: 5;
     display: flex;
     flex-direction: column;
     margin: 2rem;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
+`
+const StyledInputs = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-evenly;
 `
 
 const StyledSignupForm = styled.form`
@@ -77,6 +89,12 @@ const StyledButtons = styled.div`
     }
 `
 
+const StyledStepTitle = styled.h1`
+    margin: 0;
+    text-align: center;
+    color: ${ props => props.theme.colors.common.font };
+`
+
 interface MultiStepFormProps {
     progressLine?: object
     className?: string
@@ -85,6 +103,7 @@ interface MultiStepFormProps {
 }
 
 interface FormStepProps {
+    title?: string
     backText?: string
     onBack?: React.MouseEventHandler
     forwardText: string

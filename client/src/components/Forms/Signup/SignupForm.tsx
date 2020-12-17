@@ -4,22 +4,21 @@ import MultiStepForm, { FormStep } from '../MultiStepForm';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { countryOptions } from '../../../utils/AutocompleteConsts';
-import styled from 'styled-components';
 
 function Signup(props: SignupProps) {
 
-    const { stepNumber, pastStep } = props;
+    const { currentStep, pastStep } = props;
 
     const formProgressLine = (
         <ProgressLine>
             <ProgressLineItem title="Account Info" advance />
-            <ProgressLineItem title="Personal Info" advance={ stepNumber > 1 && true } retreat={ pastStep === 2 && true } />
-            <ProgressLineItem title="Contact Info" advance={ stepNumber > 2 && true } retreat={ pastStep === 3 && true } />
+            <ProgressLineItem title="Personal Info" advance={ currentStep > 1 && true } retreat={ pastStep === 2 && true } />
+            <ProgressLineItem title="Contact Info" advance={ currentStep > 2 && true } retreat={ pastStep === 3 && true } />
         </ProgressLine>
     );
 
     return (
-        <MultiStepForm progressLine={ formProgressLine } showStep={ stepNumber } >
+        <MultiStepForm progressLine={ formProgressLine } showStep={ currentStep } >
             <AccountInfo { ...props } />
             <PersonalInfo { ...props } />
             <ContactInfo { ...props } />
@@ -31,8 +30,7 @@ const AccountInfo = (props: AccountInfoProps) => {
     const { eventHandlers, email, password, confirmPassword, errors } = props;
     const { onForward, onInputChange } = eventHandlers;
     return (
-        <FormStep forwardText="Personal" onForward={ onForward }>
-            <StyledStepTitle>Account Information</StyledStepTitle>
+        <FormStep title="Account Information" forwardText="Personal" onForward={ onForward }>
             <TextField 
                 label="Email" 
                 name="email" 
@@ -85,8 +83,7 @@ const PersonalInfo = (props: PersonalInfoProps) => {
     const { onBack, onForward, onInputChange } = eventHandlers;
     
     return (
-        <FormStep backText="Account" onBack={ onBack } forwardText="Contact" onForward={ onForward }>
-            <StyledStepTitle>Personal Information</StyledStepTitle>
+        <FormStep title="Personal Information" backText="Account" onBack={ onBack } forwardText="Contact" onForward={ onForward }>
             <TextField 
                 label="First Name" 
                 name="firstName" 
@@ -124,8 +121,7 @@ const ContactInfo = (props: ContactInfoProps) => {
     const { eventHandlers, streetAddress, city, postalCode, country, phone, errors, isLoading } = props;
     const { onBack, onForward, onInputChange, onAutocompleteChange } = eventHandlers;
     return (
-        <FormStep backText="Contact" onBack={ onBack } forwardText="Sign up" onForward={ onForward } disableOnForward = { isLoading }>
-            <StyledStepTitle>Contact Information</StyledStepTitle>
+        <FormStep title="Contact Information" backText="Contact" onBack={ onBack } forwardText="Sign up" onForward={ onForward } disableOnForward = { isLoading }>
             <TextField 
                 label="Street Address" 
                 name="streetAddress" 
@@ -200,7 +196,7 @@ const ContactInfo = (props: ContactInfoProps) => {
 };
 
 interface SignupProps extends AccountInfoProps, PersonalInfoProps, ContactInfoProps {
-    stepNumber: number
+    currentStep: number
     pastStep: number
 }
 
@@ -236,12 +232,5 @@ interface ContactInfoProps {
     isLoading: boolean
     errors: AuthErrors
 }
-
-const StyledStepTitle = styled.h1`
-    flex: 0.5;
-    margin: 0;
-    text-align: center;
-    color: ${ props => props.theme.colors.common.font };
-`
 
 export default Signup;
